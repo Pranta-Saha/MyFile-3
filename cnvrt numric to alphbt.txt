@@ -1,0 +1,16 @@
+string convertToAlpha(long long input){
+
+    const int alphaSize(26);
+    string output("");
+
+    while(input > 0){
+        char letter = 'Z';
+        long long inputMod = input % alphaSize;
+        if(inputMod > 0){letter = 'A' + inputMod - 1;}
+        else{input -= alphaSize;}
+        input = input / alphaSize;
+        output = letter + output;
+    }
+
+    return output;
+}

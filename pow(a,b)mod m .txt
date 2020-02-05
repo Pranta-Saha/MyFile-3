@@ -1,0 +1,8 @@
+int fun(int a, int b, int n)
+{
+        if(b==0) return 1;
+        int tmp=fun(a,b>>1,n);
+        tmp=(tmp*tmp)%n;
+        if(b&1) tmp=(tmp*(a%n))%n;
+        return tmp;
+}

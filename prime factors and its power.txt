@@ -1,0 +1,19 @@
+//CALL smallest prime factor before calling this
+void generatePrimeFactors(int N)
+{
+    printf("Factor Power\n");
+    int curr = smallest_prime_factor[N];
+    int cnt = 1;
+    while (N > 1)
+    {
+        N /= smallest_prime_factor[N];
+        if (curr == smallest_prime_factor[N])
+        {
+            cnt++;
+            continue;
+        }
+        printf("%d\t%d\n", curr, cnt);
+        curr = smallest_prime_factor[N];
+        cnt = 1;
+    }
+}

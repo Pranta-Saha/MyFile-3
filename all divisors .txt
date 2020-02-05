@@ -1,0 +1,20 @@
+//all divisors in 'v', number of divisors is v.size().  
+  vector<ll> v;
+void printDivisors(ll n)
+{
+        ll tmp = sqrt(n);
+    for (ll i=1; i<=tmp; i++)
+    {
+        if (n%i==0)
+        {
+            if (n/i == i)
+                v.push_back(i);
+            else
+            {
+                v.push_back(i);
+                v.push_back(n/i);
+            }
+        }
+    }
+
+}

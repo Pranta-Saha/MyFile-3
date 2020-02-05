@@ -1,0 +1,36 @@
+
+void dijkstra(ll src, ll cost[], vector<pii> adj[])
+{
+        priority_queue<pii>pque;
+        pque.push(make_pair(0,src));
+        cost[src]=0;
+        bool visited[100005]={false};
+
+        while(!pque.empty())
+        {
+                pii prnt=pque.top();
+                pque.pop();
+                visited[prnt.second]=true;
+
+                ll len=adj[prnt.second].size();
+                for(ll i=0;i<len;i++)
+                {
+
+                        pii child=adj[prnt.second][i];
+                        if(visited[child.first]==true) continue;
+                        if( cost[child.first] > cost[prnt.second] + child.second )
+                        {
+                                cost[child.first] = cost[prnt.second] + child.second;
+                                pque.push({-cost[child.first],child.first});
+                        }
+                }
+        }
+}
+
+
+for(i=1;i<=n;i++)
+{
+
+        cost[i]=100000000000000017;
+
+}

@@ -1,0 +1,40 @@
+//if no need of mod then use 1e18 as p
+//complexity O(n-r)
+
+ll nPrMODp(ll n, ll r, ll p)
+{
+        ll ans=1;
+        for(ll i=(n-r)+1;i<=n;i++) {ans*=i; ans%=p;}
+        return ans;
+}
+
+
+
+
+//if no need of mod then use 1e18 as p
+//complexity O(n*r)
+
+ll nCrModp(ll n, ll r, ll p)
+{
+    ll C[r+1];
+    memset(C, 0, sizeof(C));
+    C[0] = 1;
+    for (ll i = 1; i <= n; i++)
+    {
+        for (ll j = min(i, r); j > 0; j--)
+            C[j] = (C[j] + C[j-1])%p;
+    }
+    return C[r];
+}
+
+or 
+
+
+//complexity O(n). New. So have to cheak before use.
+ll nCrModp(ll n, ll r, ll p)
+{
+      ll ans=1;
+      for(ll i=(n-r)+1;i<=n;i++) {ans*=i; ans%=p;}
+      for(ll i=2;i<=r;i++) ans/=i;
+      return ans;
+}

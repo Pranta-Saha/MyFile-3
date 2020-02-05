@@ -1,0 +1,58 @@
+///change base to 347 if string may contain other charecter 
+int base=127,mod=1000000007;
+
+int fun(int a, int b, int n)
+{
+        if(b==0) return 1;
+        int tmp=fun(a,b>>1,n);
+        tmp=(tmp*tmp)%n;
+        if(b&1) tmp=(tmp*(a%n))%n;
+        return tmp;
+}
+
+int hashfun(string str,int start,int endd)
+{
+        int value=0,power=endd-start;
+        for(int i=start;i<=endd;i++)
+        {
+                value+=((str[i])*fun(base,power--,mod))%mod;
+        }
+        return value;
+
+}
+
+void match(string text, string petarn)
+{
+        int len_text=text.size(),len_petarn=petarn.size();
+        int hash_of_petarn = hashfun(petarn,0,len_petarn-1);
+        int H_prev=hashfun(text,0,len_petarn-1);
+
+        if(H_prev==hash_of_petarn)
+        {
+                cout<<"wow found"<<endl;
+                return ;
+        }
+        for(int i=1;i<=(len_text-len_petarn);i++)
+        {
+                int Hi=(H_prev- (text[i-1]*fun(base,len_petarn-1,mod)) )*base + text[i+len_petarn-1];
+                if(Hi==hash_of_petarn)
+                {
+                        cout<<"wow found"<<endl;
+                        return ;
+                }
+                H_prev=Hi;
+        }
+        cout<<"not found"<<endl;
+
+}
+
+int main()
+{
+
+        int n,i,j;
+        string text,petarn;
+        cin>>text>>petarn;
+        match(text,petarn);
+
+	return 0;
+}
