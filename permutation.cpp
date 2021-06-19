@@ -30,3 +30,22 @@ int main()
         cin>>n;
         permutation(1,n);
 }
+
+or
+    string str;
+    ll len;
+    set<string>st;
+    void go(string pre, ll flag)
+    {
+        if(pre.size()==len) { st.insert(pre); return; }
+        for(ll i=len-1;i>=0;i--)
+        {
+            if((flag&(1<<i))==0)
+            {
+                pre+=str[len-i-1];
+                go(pre,flag|(1<<i));
+                pre.pop_back();
+            }
+        }
+    }
+    // call go("",0);
