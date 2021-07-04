@@ -1,0 +1,10 @@
+#define SIZE_N 1000000//max 1e6
+
+vector<int>divisors[SIZE_N];
+void divisors_upto_n(int n)
+{
+        for(int i=1;i<=n;i++)
+                for(int j=i;j<=n;j+=i)
+                        divisors[j].push_back(i);
+}
+

@@ -1,0 +1,17 @@
+   typedef pair<int,int> pp;
+
+   int id=(int)(lower_bound(v.begin(),v.end(), 
+                pp(5,std::numeric_limits<int>::min())), //Value to compare
+                [](const pp& lhs, const pp& rhs)       // Lambda
+                {
+                    return lhs < rhs ;                //  first argument < second
+                }
+                 ) - v.begin()
+               );
+
+
+				or
+
+sort(v.begin(),v.end());
+auto id = distance(v.begin(), lower_bound(v.begin(),v.end(), 
+       make_pair(5, numeric_limits<int>::min())) );

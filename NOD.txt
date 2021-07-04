@@ -1,0 +1,56 @@
+#define SIZE_N 10000000//max 1e7
+#define SIZE_P 1000000
+
+bool flag[SIZE_N+5];
+int primes[SIZE_P+5];
+int smallest_prime_factor[SIZE_N+5];
+
+int seive()
+{
+        int i,j,total=0,val;
+        for(i=2;i<=SIZE_N;i++) flag[i]=1;
+        val=sqrt(SIZE_N)+1;
+        for(i=2;i<val;i++)
+                if(flag[i]){
+                        for(j=i;j*i<=SIZE_N;j++){
+                                if(flag[i*j])
+                                {
+                                        flag[i*j]=0;
+                                        smallest_prime_factor[i*j]=i;
+                                }
+                        }
+                }
+        for(i=2;i<=SIZE_N;i++)
+                if(flag[i])
+                        {primes[total++]=i; smallest_prime_factor[i]=i;}
+        return total;
+}
+int NOD[SIZE_N]; //number of divisor upto n.
+
+//call here;
+void nod_upto_n(int n)
+{
+        seive();
+        int curr,cnt=1;
+        for(int i=1;i<=n;i++)
+        {
+            int N=i;
+
+            NOD[i]=1;
+            curr = smallest_prime_factor[N];
+            cnt = 1;
+            while (N > 1)
+            {
+                N /= smallest_prime_factor[N];
+                if (curr == smallest_prime_factor[N])
+                {
+                    cnt++;
+                    continue;
+                }
+                NOD[i]*=(cnt+1);
+                curr = smallest_prime_factor[N];
+                cnt = 1;
+            }
+            //DEBUG(NOD[i],i);
+        }
+}
